@@ -2,8 +2,8 @@ import java.util.Scanner;
 
 /**
  * Main.java
- * Entry point for the Hotel Reservation System.
- * Contains the main menu and drives all user interaction.
+ * Application entry point for the CodeAlpha Hotel Reservation System.
+ * Provides a clean console-based interactive UI.
  */
 public class Main {
 
@@ -12,30 +12,23 @@ public class Main {
         Hotel hotel = new Hotel();
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println();
-        System.out.println("========================================");
-        System.out.println("       HOTEL RESERVATION SYSTEM         ");
-        System.out.println("        Welcome to Grand Vista Hotel    ");
-        System.out.println("========================================");
-        System.out.println("  Existing bookings loaded from file.   ");
+        printWelcomeHeader();
 
         boolean running = true;
 
         while (running) {
-            printMenu();
+            printMainMenu();
 
-            System.out.print("  Enter your choice: ");
+            System.out.print("  Enter your choice (1-7): ");
             String input = scanner.nextLine().trim();
             int choice;
 
             try {
                 choice = Integer.parseInt(input);
             } catch (NumberFormatException e) {
-                System.out.println("  [!] Invalid input. Please enter a number between 1 and 7.");
+                System.out.println("\n  [!] Invalid selection. Please enter a number between 1 and 7.");
                 continue;
             }
-
-            System.out.println();
 
             switch (choice) {
                 case 1:
@@ -63,34 +56,56 @@ public class Main {
                     break;
 
                 case 7:
-                    System.out.println("========================================");
-                    System.out.println("  Thank you for using Hotel Reservation  ");
-                    System.out.println("  System. Have a great day!              ");
-                    System.out.println("========================================");
+                    printExitHeader();
                     running = false;
                     break;
 
                 default:
-                    System.out.println("  [!] Invalid choice. Please select between 1 and 7.");
+                    System.out.println("\n  [!] Invalid choice. Please select an option between 1 and 7.");
             }
         }
 
         scanner.close();
     }
 
-    // Print the main menu
-    private static void printMenu() {
+    /**
+     * Prints the initial system header banner.
+     */
+    private static void printWelcomeHeader() {
         System.out.println();
-        System.out.println("========================================");
-        System.out.println("         MAIN MENU                      ");
-        System.out.println("========================================");
-        System.out.println("  1. View All Rooms");
-        System.out.println("  2. Search Available Rooms");
-        System.out.println("  3. Make Reservation");
-        System.out.println("  4. View Booking Details");
-        System.out.println("  5. View All Bookings");
-        System.out.println("  6. Cancel Reservation");
-        System.out.println("  7. Exit");
-        System.out.println("========================================");
+        System.out.println("==========================================================");
+        System.out.println("              CODEALPHA HOTEL RESERVATION SYSTEM          ");
+        System.out.println("             Welcome to Grand Vista Luxury Hotel          ");
+        System.out.println("==========================================================");
+        System.out.println("  [✓] System Initialized & Saved Bookings Restored.");
+    }
+
+    /**
+     * Prints the main operational menu options.
+     */
+    private static void printMainMenu() {
+        System.out.println();
+        System.out.println("==========================================================");
+        System.out.println("                       MAIN MENU                          ");
+        System.out.println("==========================================================");
+        System.out.println("  1. View All Rooms Inventory");
+        System.out.println("  2. Search Available Rooms by Category");
+        System.out.println("  3. Make a New Reservation");
+        System.out.println("  4. View Specific Booking Details");
+        System.out.println("  5. View All Reservations Log");
+        System.out.println("  6. Cancel a Reservation");
+        System.out.println("  7. Exit System");
+        System.out.println("==========================================================");
+    }
+
+    /**
+     * Prints the exit thank-you header banner.
+     */
+    private static void printExitHeader() {
+        System.out.println();
+        System.out.println("==========================================================");
+        System.out.println("  Thank you for using the Hotel Reservation System!       ");
+        System.out.println("  Have a wonderful day!                                   ");
+        System.out.println("==========================================================");
     }
 }

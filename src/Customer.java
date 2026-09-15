@@ -1,19 +1,25 @@
 /**
  * Customer.java
- * Stores customer details required for a reservation.
+ * Stores customer details required for room bookings with input sanitization.
  */
 public class Customer {
 
     private String customerName;
     private String phoneNumber;
 
-    // Constructor
+    /**
+     * Constructor to create a Customer record.
+     * Sanitizes customer name to prevent CSV breaking characters.
+     * @param customerName Full name of the customer
+     * @param phoneNumber 10-digit contact number
+     */
     public Customer(String customerName, String phoneNumber) {
-        this.customerName = customerName;
-        this.phoneNumber = phoneNumber;
+        // Remove any commas to maintain CSV file integrity
+        this.customerName = customerName != null ? customerName.replace(",", "").trim() : "";
+        this.phoneNumber = phoneNumber != null ? phoneNumber.trim() : "";
     }
 
-    // Getters
+    // Getters and Setters
     public String getCustomerName() {
         return customerName;
     }
@@ -22,13 +28,12 @@ public class Customer {
         return phoneNumber;
     }
 
-    // Setters
     public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+        this.customerName = customerName != null ? customerName.replace(",", "").trim() : "";
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+        this.phoneNumber = phoneNumber != null ? phoneNumber.trim() : "";
     }
 
     @Override

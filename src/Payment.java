@@ -1,7 +1,7 @@
 /**
  * Payment.java
  * Simulates payment processing for a hotel reservation.
- * No real payments are processed.
+ * Generates unique transaction IDs and tracks payment status.
  */
 public class Payment {
 
@@ -12,7 +12,11 @@ public class Payment {
 
     private static int transactionCounter = 1001;
 
-    // Constructor
+    /**
+     * Constructor to initialize a payment attempt.
+     * @param amount Total amount to be processed
+     * @param paymentMethod Method used (Credit/Debit Card, UPI, Cash)
+     */
     public Payment(double amount, String paymentMethod) {
         this.amount = amount;
         this.paymentMethod = paymentMethod;
@@ -20,28 +24,35 @@ public class Payment {
         this.transactionId = generateTransactionId();
     }
 
-    // Generate a unique transaction ID like TXN1001, TXN1002, ...
-    public String generateTransactionId() {
+    /**
+     * Generates a unique transaction ID (e.g. TXN1001, TXN1002).
+     */
+    private synchronized String generateTransactionId() {
         return "TXN" + transactionCounter++;
     }
 
-    // Simulate payment processing — always succeeds
+    /**
+     * Simulates payment processing — marks transaction as successful.
+     * @return true when payment succeeds
+     */
     public boolean processPayment() {
         this.paymentStatus = "SUCCESS";
         return true;
     }
 
-    // Display payment confirmation
+    /**
+     * Displays a formatted summary receipt of the payment.
+     */
     public void displayPaymentDetails() {
         System.out.println();
-        System.out.println("========================================");
-        System.out.println("           PAYMENT DETAILS              ");
-        System.out.println("========================================");
-        System.out.println("  Transaction ID  : " + transactionId);
-        System.out.println("  Amount          : Rs." + (int) amount);
-        System.out.println("  Payment Method  : " + paymentMethod);
-        System.out.println("  Payment Status  : " + paymentStatus);
-        System.out.println("========================================");
+        System.out.println("==================================================");
+        System.out.println("               PAYMENT RECEIPT                    ");
+        System.out.println("==================================================");
+        System.out.printf("  Transaction ID : %s%n", transactionId);
+        System.out.printf("  Amount Paid    : Rs. %.0f%n", amount);
+        System.out.printf("  Payment Method : %s%n", paymentMethod);
+        System.out.printf("  Status         : %s%n", paymentStatus);
+        System.out.println("==================================================");
     }
 
     // Getters

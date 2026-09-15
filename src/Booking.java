@@ -13,9 +13,10 @@ public class Booking {
     private String paymentMethod;
     private String bookingStatus; // CONFIRMED or CANCELLED
 
-    // Constructor
-    public Booking(String bookingId, Customer customer, Room room, int numberOfNights,
-                   String paymentMethod) {
+    /**
+     * Constructor to create a new Booking.
+     */
+    public Booking(String bookingId, Customer customer, Room room, int numberOfNights, String paymentMethod) {
         this.bookingId = bookingId;
         this.customer = customer;
         this.room = room;
@@ -26,12 +27,14 @@ public class Booking {
         this.totalAmount = calculateTotal();
     }
 
-    // Calculate total booking cost
+    /**
+     * Calculates total booking price.
+     */
     public double calculateTotal() {
         return room.getPricePerNight() * numberOfNights;
     }
 
-    // Getters
+    // Getters and Setters
     public String getBookingId() {
         return bookingId;
     }
@@ -64,7 +67,6 @@ public class Booking {
         return bookingStatus;
     }
 
-    // Setters
     public void setBookingStatus(String bookingStatus) {
         this.bookingStatus = bookingStatus;
     }
@@ -73,34 +75,39 @@ public class Booking {
         this.paymentStatus = paymentStatus;
     }
 
-    // Print full booking details
+    /**
+     * Prints comprehensive booking confirmation details.
+     */
     public void displayBookingDetails() {
         System.out.println();
-        System.out.println("========================================");
-        System.out.println("         BOOKING CONFIRMED              ");
-        System.out.println("========================================");
-        System.out.println("  Booking ID     : " + bookingId);
-        System.out.println("  Customer       : " + customer.getCustomerName());
-        System.out.println("  Phone          : " + customer.getPhoneNumber());
-        System.out.println("  Room No.       : " + room.getRoomNumber());
-        System.out.println("  Category       : " + room.getCategory());
-        System.out.println("  Price/Night    : Rs." + (int) room.getPricePerNight());
-        System.out.println("  Nights         : " + numberOfNights);
-        System.out.println("  Total Amount   : Rs." + (int) totalAmount);
-        System.out.println("  Payment Status : " + paymentStatus);
-        System.out.println("  Payment Method : " + paymentMethod);
-        System.out.println("  Booking Status : " + bookingStatus);
-        System.out.println("========================================");
+        System.out.println("==================================================");
+        System.out.println("            RESERVATION CONFIRMATION              ");
+        System.out.println("==================================================");
+        System.out.printf("  Booking ID     : %s%n", bookingId);
+        System.out.printf("  Customer Name  : %s%n", customer.getCustomerName());
+        System.out.printf("  Phone Number   : %s%n", customer.getPhoneNumber());
+        System.out.printf("  Room Number    : %d%n", room.getRoomNumber());
+        System.out.printf("  Category       : %s%n", room.getCategory());
+        System.out.printf("  Price / Night  : Rs. %.0f%n", room.getPricePerNight());
+        System.out.printf("  Duration       : %d Night(s)%n", numberOfNights);
+        System.out.printf("  Total Amount   : Rs. %.0f%n", totalAmount);
+        System.out.printf("  Payment Status : %s%n", paymentStatus);
+        System.out.printf("  Payment Method : %s%n", paymentMethod);
+        System.out.printf("  Booking Status : %s%n", bookingStatus);
+        System.out.println("==================================================");
     }
 
+    /**
+     * Formats booking as a row for table outputs.
+     */
     @Override
     public String toString() {
-        return String.format("%-10s %-16s %-10d %-10d %-16s %s",
+        return String.format("  %-12s %-26s %-10d %-8d %-14s %s",
                 bookingId,
                 customer.getCustomerName(),
                 room.getRoomNumber(),
                 numberOfNights,
-                "Rs." + (int) totalAmount,
+                "Rs. " + (int) totalAmount,
                 bookingStatus);
     }
 }
